@@ -154,6 +154,27 @@ function cloud(x, y, s = 1) {
   return `<path d="M${p(-110, 40)} Q${p(-150, 40)} ${p(-140, 0)} Q${p(-130, -40)} ${p(-85, -30)} Q${p(-70, -85)} ${p(-10, -75)} Q${p(40, -110)} ${p(85, -60)} Q${p(145, -60)} ${p(140, -5)} Q${p(160, 40)} ${p(110, 40)} Z" fill="#fff"/>`;
 }
 
+function heart(x, y, s = 1) {
+  const p = (dx, dy) => `${(x + dx * s).toFixed(1)} ${(y + dy * s).toFixed(1)}`;
+  return `M${p(0, 70)} C${p(-60, 30)} ${p(-50, -30)} ${p(0, 0)} C${p(50, -30)} ${p(60, 30)} ${p(0, 70)} Z`;
+}
+function gear(cx, cy, r, n = 8) {
+  let d = ''; const ri = r * 0.78, w = Math.PI / n * 0.5;
+  for (let i = 0; i < n; i++) {
+    const a = i * 2 * Math.PI / n;
+    [[a - w * 1.4, ri], [a - w, r], [a + w, r], [a + w * 1.4, ri]].forEach(([b, rr], k) => {
+      d += (i || k ? 'L' : 'M') + (cx + rr * Math.cos(b)).toFixed(1) + ' ' + (cy + rr * Math.sin(b)).toFixed(1);
+    });
+  }
+  return d + 'Z';
+}
+// Rosto padrão dos personagens: olhos, sorriso e bochechas.
+function face(x, y) {
+  return `<circle cx="${x - 30}" cy="${y + 5}" r="10" fill="#000"/><circle cx="${x + 30}" cy="${y + 5}" r="10" fill="#000"/>` +
+    `<path d="M${x - 25} ${y + 40} Q${x} ${y + 60} ${x + 25} ${y + 40}"/>` +
+    `<circle cx="${x - 50}" cy="${y + 35}" r="12"/><circle cx="${x + 50}" cy="${y + 35}" r="12"/>`;
+}
+
 const PAGES = [
   { id: 'gato', nome: 'Gatinho', svg: `
     <circle cx="150" cy="680" r="70" fill="#fff"/>
@@ -445,6 +466,210 @@ const PAGES = [
     ${petals(400, 700, 6, 22, 16)}<circle cx="400" cy="700" r="14" fill="#fff"/>
     ${petals(680, 700, 6, 22, 16)}<circle cx="680" cy="700" r="14" fill="#fff"/>
     <path d="M0 790 L800 790"/>` },
+
+  { id: 'princesa', nome: 'Princesa', svg: `
+    <path d="${star(130, 140, 30)}"/><path d="${star(680, 160, 26)}"/>
+    <path d="${heart(130, 430, 0.6)}"/><path d="${heart(670, 450, 0.6)}"/>
+    <path d="M60 760 L740 760"/>
+    <path d="M300 220 Q290 120 400 115 Q510 120 500 220 L520 420 Q470 440 450 400 L350 400 Q330 440 280 420 Z" fill="#fff"/>
+    <ellipse cx="360" cy="738" rx="28" ry="14" fill="#fff"/><ellipse cx="440" cy="738" rx="28" ry="14" fill="#fff"/>
+    <rect x="388" y="290" width="24" height="45" fill="#fff"/>
+    <path d="M335 410 Q260 600 220 700 Q400 750 580 700 Q540 600 465 410 Z" fill="#fff"/>
+    <path d="M233 665 Q400 710 567 665"/>
+    <path d="M350 330 L450 330 L465 420 L335 420 Z" fill="#fff"/>
+    <path d="M325 360 Q300 420 305 470 L325 470 Q325 420 345 375 Z" fill="#fff"/>
+    <path d="M475 360 Q500 420 495 470 L475 470 Q475 420 455 375 Z" fill="#fff"/>
+    <circle cx="315" cy="480" r="13" fill="#fff"/><circle cx="485" cy="480" r="13" fill="#fff"/>
+    <circle cx="340" cy="345" r="28" fill="#fff"/><circle cx="460" cy="345" r="28" fill="#fff"/>
+    <circle cx="400" cy="220" r="80" fill="#fff"/>
+    <path d="M322 210 Q340 140 400 140 Q460 140 478 210 Q450 180 400 190 Q350 180 322 210 Z" fill="#fff"/>
+    <path d="M350 150 L355 95 L380 125 L400 85 L420 125 L445 95 L450 150 Z" fill="#fff"/>
+    <circle cx="400" cy="130" r="8"/>
+    ${face(400, 220)}` },
+
+  { id: 'sereia', nome: 'Sereia', svg: `
+    <path d="M70 790 Q30 680 80 600 Q60 540 100 480 Q140 560 120 620 Q160 700 120 790 Z"/>
+    <path d="M690 790 Q660 700 710 640 Q700 590 730 540 Q770 610 750 660 Q780 730 750 790 Z"/>
+    <path d="M0 770 Q200 745 400 770 T800 770"/>
+    <path d="${star(600, 760, 30)}" fill="#fff"/>
+    <circle cx="160" cy="250" r="18"/><circle cx="130" cy="180" r="24"/><circle cx="640" cy="230" r="16"/><circle cx="670" cy="160" r="22"/>
+    <path d="M310 220 Q300 120 400 115 Q500 120 490 220 Q520 300 495 360 Q520 420 480 450 L320 450 Q280 420 305 360 Q280 300 310 220 Z" fill="#fff"/>
+    <path d="M400 700 Q330 690 300 760 Q360 740 400 735 Q440 740 500 760 Q470 690 400 700 Z" fill="#fff"/>
+    <path d="M335 440 L465 440 Q470 560 430 650 Q418 690 420 710 L380 710 Q382 690 370 650 Q330 560 335 440 Z" fill="#fff"/>
+    <path d="M345 510 Q370 535 400 510 Q430 535 455 510 M355 580 Q378 602 400 580 Q422 602 445 580"/>
+    <rect x="388" y="290" width="24" height="45" fill="#fff"/>
+    <path d="M350 330 L450 330 L465 450 L335 450 Z" fill="#fff"/>
+    <path d="M352 362 Q375 337 398 362 Q375 387 352 362 Z M402 362 Q425 337 448 362 Q425 387 402 362 Z"/>
+    <path d="M345 345 Q290 330 260 280 L278 268 Q305 310 355 325 Z" fill="#fff"/>
+    <circle cx="262" cy="266" r="13" fill="#fff"/>
+    <path d="M455 345 Q500 400 505 440 L485 445 Q480 405 445 370 Z" fill="#fff"/>
+    <circle cx="497" cy="452" r="13" fill="#fff"/>
+    <circle cx="400" cy="220" r="80" fill="#fff"/>
+    <path d="M322 210 Q340 140 400 140 Q460 140 478 210 Q450 180 400 190 Q350 180 322 210 Z" fill="#fff"/>
+    ${petals(468, 160, 5, 15, 12)}<circle cx="468" cy="160" r="10" fill="#fff"/>
+    ${face(400, 220)}` },
+
+  { id: 'heroi', nome: 'Super-Herói', svg: `
+    ${cloud(650, 150, 0.7)}
+    <rect x="40" y="430" width="110" height="300" fill="#fff"/>
+    <rect x="60" y="460" width="25" height="30"/><rect x="105" y="460" width="25" height="30"/>
+    <rect x="60" y="530" width="25" height="30"/><rect x="105" y="530" width="25" height="30"/>
+    <rect x="60" y="600" width="25" height="30"/><rect x="105" y="600" width="25" height="30"/>
+    <rect x="640" y="380" width="120" height="350" fill="#fff"/>
+    <rect x="662" y="410" width="28" height="32"/><rect x="710" y="410" width="28" height="32"/>
+    <rect x="662" y="480" width="28" height="32"/><rect x="710" y="480" width="28" height="32"/>
+    <rect x="662" y="550" width="28" height="32"/><rect x="710" y="550" width="28" height="32"/>
+    <path d="M0 730 L800 730"/>
+    <path d="M330 330 L470 330 L560 700 Q400 740 240 700 Z" fill="#fff"/>
+    <rect x="350" y="560" width="45" height="150" fill="#fff"/><rect x="405" y="560" width="45" height="150" fill="#fff"/>
+    <path d="M345 650 L398 650 L398 725 L335 725 Q335 705 345 700 Z" fill="#fff"/>
+    <path d="M402 650 L455 650 L455 700 Q465 705 465 725 L402 725 Z" fill="#fff"/>
+    <path d="M345 520 L455 520 L455 575 L405 575 L400 545 L395 575 L345 575 Z" fill="#fff"/>
+    <path d="M340 330 L460 330 L455 520 L345 520 Z" fill="#fff"/>
+    <rect x="342" y="500" width="116" height="25" fill="#fff"/><rect x="385" y="500" width="30" height="25"/>
+    <path d="${star(400, 415, 42)}" fill="#fff"/>
+    <path d="M345 345 L280 390 L295 410 L355 375 Z" fill="#fff"/>
+    <path d="M280 390 L270 320 L292 318 L298 400 Z" fill="#fff"/>
+    <circle cx="281" cy="310" r="20" fill="#fff"/>
+    <path d="M455 345 L520 390 L505 410 L445 375 Z" fill="#fff"/>
+    <path d="M520 390 L530 320 L508 318 L502 400 Z" fill="#fff"/>
+    <circle cx="519" cy="310" r="20" fill="#fff"/>
+    <rect x="388" y="290" width="24" height="45" fill="#fff"/>
+    <circle cx="400" cy="220" r="80" fill="#fff"/>
+    <path d="M320 205 Q312 145 365 138 Q380 108 420 115 Q460 112 468 145 Q492 165 480 205 Q400 175 320 205 Z" fill="#fff"/>
+    <path d="M395 118 Q410 140 400 160"/>
+    <path d="M330 215 Q400 190 470 215 Q470 250 440 248 Q420 245 400 232 Q380 245 360 248 Q330 250 330 215 Z" fill="#fff"/>
+    ${face(400, 220)}` },
+
+  { id: 'heroina', nome: 'Super-Heroína', svg: `
+    <path d="M640 100 A60 60 0 1 0 700 190 A45 45 0 1 1 640 100 Z"/>
+    <path d="${star(120, 130, 30)}"/><path d="${star(150, 450, 24)}"/><path d="${star(670, 420, 26)}"/>
+    ${cloud(160, 640, 0.6)}${cloud(650, 640, 0.6)}
+    <path d="M330 330 L470 330 L560 700 Q400 740 240 700 Z" fill="#fff"/>
+    <path d="M450 170 Q540 180 540 280 Q560 330 520 360 Q530 300 470 240 Z" fill="#fff"/>
+    <rect x="360" y="580" width="35" height="120" fill="#fff"/><rect x="405" y="580" width="35" height="120" fill="#fff"/>
+    <path d="M355 650 L398 650 L398 725 L345 725 Q345 705 355 700 Z" fill="#fff"/>
+    <path d="M402 650 L445 650 L445 700 Q455 705 455 725 L402 725 Z" fill="#fff"/>
+    <path d="M345 500 L455 500 L485 590 L315 590 Z" fill="#fff"/>
+    <path d="M340 330 L460 330 L455 510 L345 510 Z" fill="#fff"/>
+    <rect x="343" y="490" width="114" height="22" fill="#fff"/>
+    <path d="${heart(400, 375, 0.7)}" fill="#fff"/>
+    <path d="M345 340 L280 420 L345 478 L352 455 L305 418 L355 365 Z" fill="#fff"/>
+    <path d="M455 340 L520 420 L455 478 L448 455 L495 418 L445 365 Z" fill="#fff"/>
+    <rect x="388" y="290" width="24" height="45" fill="#fff"/>
+    <circle cx="400" cy="220" r="80" fill="#fff"/>
+    <path d="M322 210 Q340 140 400 140 Q460 140 478 210 Q450 180 400 190 Q350 180 322 210 Z" fill="#fff"/>
+    <path d="M330 215 Q400 190 470 215 Q470 250 440 248 Q420 245 400 232 Q380 245 360 248 Q330 250 330 215 Z" fill="#fff"/>
+    ${face(400, 220)}` },
+
+  { id: 'astronauta', nome: 'Astronauta', svg: `
+    <circle cx="650" cy="150" r="55" fill="#fff"/>
+    <ellipse cx="650" cy="150" rx="95" ry="22" transform="rotate(-15 650 150)"/>
+    <path d="${star(120, 120, 30)}"/><path d="${star(150, 450, 22)}"/><path d="${star(680, 420, 25)}"/>
+    <path d="M0 760 Q200 720 400 740 T800 730"/>
+    <ellipse cx="150" cy="778" rx="40" ry="12"/><ellipse cx="580" cy="772" rx="50" ry="14"/>
+    <path d="M232 283 L232 120"/>
+    <path d="M232 120 L330 142 L232 170 Z" fill="#fff"/>
+    <rect x="270" y="350" width="40" height="140" fill="#fff"/><rect x="490" y="350" width="40" height="140" fill="#fff"/>
+    <rect x="330" y="550" width="60" height="135" fill="#fff"/><rect x="410" y="550" width="60" height="135" fill="#fff"/>
+    <rect x="318" y="680" width="78" height="40" rx="15" fill="#fff"/><rect x="404" y="680" width="78" height="40" rx="15" fill="#fff"/>
+    <path d="M320 330 Q300 340 300 380 L305 560 L495 560 L500 380 Q500 340 480 330 Z" fill="#fff"/>
+    <path d="M305 520 L495 520"/>
+    <rect x="360" y="390" width="80" height="60" rx="10"/>
+    <circle cx="382" cy="420" r="9"/><circle cx="418" cy="420" r="9"/>
+    <path d="M305 380 L230 330 L245 310 L310 355 Z" fill="#fff"/>
+    <circle cx="232" cy="305" r="22" fill="#fff"/>
+    <path d="M495 380 L540 470 L520 480 L490 420 Z" fill="#fff"/>
+    <circle cx="532" cy="490" r="22" fill="#fff"/>
+    <circle cx="400" cy="230" r="110" fill="#fff"/>
+    <circle cx="400" cy="235" r="80" fill="#fff"/>
+    ${face(400, 228)}` },
+
+  { id: 'pirata', nome: 'Pirata', svg: `
+    ${cloud(640, 140, 0.7)}
+    <path d="M560 250 Q580 230 600 250 Q620 230 640 250"/>
+    <path d="M0 730 L800 730"/>
+    <path d="M560 730 Q590 712 620 730 Q650 712 680 730 Q710 712 740 730 Q770 712 800 730"/>
+    <rect x="80" y="620" width="140" height="100" fill="#fff"/>
+    <path d="M80 620 Q150 560 220 620 Z" fill="#fff"/>
+    <path d="M110 620 L110 720 M190 620 L190 720"/>
+    <rect x="140" y="640" width="20" height="25"/>
+    <circle cx="245" cy="712" r="12"/><circle cx="268" cy="700" r="10"/>
+    <path d="M330 680 L395 680 L395 730 L320 730 Q318 705 330 700 Z" fill="#fff"/>
+    <path d="M405 680 L470 680 L470 700 Q482 705 480 730 L405 730 Z" fill="#fff"/>
+    <path d="M330 530 L470 530 L465 680 L410 680 L400 590 L390 680 L335 680 Z" fill="#fff"/>
+    <path d="M340 320 L460 320 L470 520 L330 520 Z" fill="#fff"/>
+    <path d="M336 370 L464 370 M333 420 L467 420 M331 470 L469 470"/>
+    <rect x="328" y="505" width="144" height="25" fill="#fff"/><rect x="385" y="505" width="30" height="25"/>
+    <path d="M282 412 L240 250 L255 245 L298 408 Z" fill="#fff"/>
+    <path d="M265 420 L315 405"/>
+    <path d="M340 340 L285 420 L305 432 L355 365 Z" fill="#fff"/>
+    <circle cx="290" cy="430" r="16" fill="#fff"/>
+    <path d="M460 340 L520 420 L460 475 L452 455 L495 418 L445 365 Z" fill="#fff"/>
+    <path d="M490 325 L478 365 L500 360 Z" fill="#fff"/>
+    <ellipse cx="500" cy="300" rx="22" ry="35" fill="#fff"/>
+    <path d="M482 290 Q474 312 492 322"/>
+    <circle cx="505" cy="255" r="18" fill="#fff"/>
+    <path d="M520 249 L538 257 L520 264 Z" fill="#fff"/>
+    <circle cx="509" cy="251" r="4" fill="#000"/>
+    <rect x="388" y="290" width="24" height="40" fill="#fff"/>
+    <circle cx="400" cy="220" r="80" fill="#fff"/>
+    <path d="M300 175 Q400 60 500 175 Q400 150 300 175 Z" fill="#fff"/>
+    <circle cx="400" cy="130" r="14"/>
+    <path d="M326 205 L352 214 M390 214 L475 240"/>
+    <ellipse cx="370" cy="225" rx="22" ry="18" fill="#000"/>
+    <circle cx="430" cy="225" r="10" fill="#000"/>
+    <path d="M375 260 Q400 280 425 260"/>
+    <circle cx="350" cy="255" r="12"/><circle cx="450" cy="255" r="12"/>` },
+
+  { id: 'robo', nome: 'Robô', svg: `
+    <path d="${gear(120, 200, 55, 8)}"/><circle cx="120" cy="200" r="18"/>
+    <path d="${gear(680, 560, 50, 8)}"/><circle cx="680" cy="560" r="16"/>
+    <path d="${star(670, 140, 28)}"/><path d="${star(130, 520, 22)}"/>
+    <path d="M40 690 L760 690"/>
+    <path d="M400 110 L400 72"/><circle cx="400" cy="60" r="14" fill="#fff"/>
+    <rect x="280" y="150" width="20" height="50" fill="#fff"/><rect x="500" y="150" width="20" height="50" fill="#fff"/>
+    <rect x="330" y="520" width="50" height="120" fill="#fff"/><rect x="420" y="520" width="50" height="120" fill="#fff"/>
+    <rect x="305" y="635" width="85" height="45" rx="18" fill="#fff"/><rect x="410" y="635" width="85" height="45" rx="18" fill="#fff"/>
+    <rect x="375" y="255" width="50" height="40" fill="#fff"/>
+    <path d="M290 320 Q230 330 220 400 L245 405 Q255 350 292 350 Z" fill="#fff"/>
+    <circle cx="232" cy="422" r="24" fill="#fff"/>
+    <path d="M510 320 Q570 300 585 230 L560 225 Q550 285 510 295 Z" fill="#fff"/>
+    <circle cx="572" cy="213" r="24" fill="#fff"/>
+    <rect x="290" y="290" width="220" height="230" rx="30" fill="#fff"/>
+    <rect x="340" y="330" width="120" height="90" rx="14"/>
+    <path d="${heart(400, 352, 0.55)}"/>
+    <circle cx="350" cy="470" r="14"/><circle cx="400" cy="470" r="14"/><circle cx="450" cy="470" r="14"/>
+    <rect x="300" y="110" width="200" height="150" rx="30" fill="#fff"/>
+    <circle cx="355" cy="175" r="28"/><circle cx="445" cy="175" r="28"/>
+    <circle cx="355" cy="178" r="12" fill="#000"/><circle cx="445" cy="178" r="12" fill="#000"/>
+    <rect x="345" y="220" width="110" height="22" rx="11"/>
+    <path d="M372 220 L372 242 M400 220 L400 242 M428 220 L428 242"/>` },
+
+  { id: 'dragao', nome: 'Dragãozinho', svg: `
+    ${cloud(160, 150, 0.6)}
+    <path d="${star(650, 150, 30)}"/><path d="${star(700, 330, 20)}"/>
+    <path d="M30 700 Q400 690 770 700"/>
+    <path d="M500 590 Q650 610 660 500 L640 468 L702 480 L680 512 Q680 640 500 650 Z" fill="#fff"/>
+    <path d="M330 400 Q220 320 180 400 Q220 400 230 440 Q260 420 280 460 Q300 440 330 460 Z" fill="#fff"/>
+    <path d="M470 400 Q580 320 620 400 Q580 400 570 440 Q540 420 520 460 Q500 440 470 460 Z" fill="#fff"/>
+    <ellipse cx="400" cy="520" rx="130" ry="140" fill="#fff"/>
+    <ellipse cx="400" cy="560" rx="75" ry="95"/>
+    <path d="M335 520 Q400 535 465 520 M327 570 Q400 585 473 570 M342 620 Q400 635 458 620"/>
+    <ellipse cx="330" cy="668" rx="50" ry="28" fill="#fff"/><ellipse cx="470" cy="668" rx="50" ry="28" fill="#fff"/>
+    <ellipse cx="290" cy="500" rx="22" ry="40" transform="rotate(30 290 500)" fill="#fff"/>
+    <ellipse cx="510" cy="500" rx="22" ry="40" transform="rotate(-30 510 500)" fill="#fff"/>
+    <path d="M90 680 L110 660 L130 680 L150 660 L170 680 L190 660 L210 680 L210 720 Q150 760 90 720 Z" fill="#fff"/>
+    <path d="M330 200 L310 130 L360 180 Z" fill="#fff"/><path d="M470 200 L490 130 L440 180 Z" fill="#fff"/>
+    <path d="M378 182 L400 145 L422 182 Z" fill="#fff"/>
+    <ellipse cx="400" cy="280" rx="120" ry="105" fill="#fff"/>
+    <circle cx="350" cy="265" r="24"/><circle cx="450" cy="265" r="24"/>
+    <circle cx="355" cy="270" r="12" fill="#000"/><circle cx="445" cy="270" r="12" fill="#000"/>
+    <circle cx="359" cy="265" r="4" fill="#fff" stroke="none"/><circle cx="449" cy="265" r="4" fill="#fff" stroke="none"/>
+    <ellipse cx="400" cy="330" rx="60" ry="38" fill="#fff"/>
+    <circle cx="385" cy="322" r="5" fill="#000"/><circle cx="415" cy="322" r="5" fill="#000"/>
+    <path d="M375 345 Q400 362 425 345"/>
+    <circle cx="315" cy="320" r="14"/><circle cx="485" cy="320" r="14"/>` },
 ];
 
 const CORES = ['#ff4d4d','#ff8a3d','#ffd23f','#8bd346','#2fa84f','#38c6d9','#a3d5ff','#3a86ff','#1d3fa0',
@@ -750,7 +975,8 @@ $('#apagar').onclick = () => {
   if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
   await buildAll(); renderHome();
   if (!q && !LS.get('lc_ok')) openModal('first');
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => {});
+  // No PC de desenvolvimento (localhost) o modo offline fica desligado para as mudanças aparecerem na hora.
+  if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
 })();
 </script>
 </body>
