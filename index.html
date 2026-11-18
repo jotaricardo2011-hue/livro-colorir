@@ -35,12 +35,12 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;background:none;paddin
 
 /* ---------- Pintura ---------- */
 #paint .bar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px;padding:calc(8px + env(safe-area-inset-top)) 8px 4px}
-.tool{width:clamp(44px,12vw,58px);height:clamp(44px,12vw,58px);border-radius:16px;background:#fff;box-shadow:var(--shadow);display:grid;place-items:center;border:3px solid transparent;transition:transform .08s}
+.tool{width:clamp(40px,10.5vw,58px);height:clamp(40px,10.5vw,58px);border-radius:16px;background:#fff;box-shadow:var(--shadow);display:grid;place-items:center;border:3px solid transparent;transition:transform .08s}
 .tool:active{transform:scale(.9)}
 .tool svg{width:60%;height:60%;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .tool .tint{fill:var(--cur);stroke:var(--ink)}
 .tool.sel{border-color:var(--accent);background:#fff1e6}
-.sep{width:6px}
+.sep{width:clamp(0px,1.5vw,6px)}
 .sizes{display:none;gap:6px}
 .sizes.on{display:flex}
 .sz i{display:block;border-radius:50%;background:var(--cur);box-shadow:0 0 0 2px rgba(0,0,0,.25)}

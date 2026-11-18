@@ -1,5 +1,5 @@
 // Funciona sem internet: responde do cache e atualiza em segundo plano.
-const CACHE = 'colorir-v3';
+const CACHE = 'colorir-v4';
 const FILES = ['./', 'index.html', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
